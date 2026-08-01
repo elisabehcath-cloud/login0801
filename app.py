@@ -1,17 +1,14 @@
-import os
 import streamlit as st
-from dotenv import load_dotenv
 
-# 讀取 .env 檔案內容
-load_dotenv()
-
-# 從環境變數中取得密碼，如果找不到則給予預設值
-PASSWORD = os.getenv("APP_PASSWORD", "defaultpassword")
-
+# 設定頁面標題
 st.set_page_config(page_title="登入系統", page_icon="🔒")
 
+# 初始化 session_state
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+
+# 直接從 Streamlit Secrets 讀取密碼
+PASSWORD = st.secrets["APP_PASSWORD"]
 
 ## ---------------- 登入介面 ----------------
 if not st.session_state.logged_in:
