@@ -8,7 +8,7 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 # 設定預設密碼 (可自行修改)
-PASSWORD = "123456"
+PASSWORD = "APP_PASSWORD"
 
 ## ---------------- 登入介面 ----------------
 if not st.session_state.logged_in:
