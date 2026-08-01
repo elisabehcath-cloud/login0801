@@ -3,15 +3,15 @@ import streamlit as st
 # 設定頁面標題
 st.set_page_config(page_title="登入系統", page_icon="🔒")
 
-# 初始化 session_state 用來紀錄登入狀態
-if "logged_in" not in st.state:
-    st.state.logged_in = False
+# 初始化 session_state 用來紀錄登入狀態（修正：使用 st.session_state）
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
 
 # 設定預設密碼 (可自行修改)
 PASSWORD = "mysecretpassword"
 
 ## ---------------- 登入介面 ----------------
-if not st.state.logged_in:
+if not st.session_state.logged_in:
     st.title("🔑 請先登入")
     
     # 密碼輸入框 (type="password" 會隱藏輸入字元)
@@ -19,7 +19,7 @@ if not st.state.logged_in:
     
     if st.button("登入"):
         if password_input == PASSWORD:
-            st.state.logged_in = True
+            st.session_state.logged_in = True
             st.rerun()  # 重新整理頁面以顯示登入後內容
         else:
             st.error("❌ 密碼錯誤，請再試一次！")
@@ -44,5 +44,5 @@ else:
     
     # 登出按鈕
     if st.button("登出"):
-        st.state.logged_in = False
+        st.session_state.logged_in = False
         st.rerun()
